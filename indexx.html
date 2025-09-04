@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Replay Live Member JKT48</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #e91e63;
+      margin-bottom: 30px;
+    }
+    .replay-card {
+      background: #1e1e1e;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 6px #e91e63;
+    }
+    .replay-card a {
+      color: #f06292;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .date {
+      color: #bbb;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Replay Otomatis Live Member JKT48</h1>
+<div id="content">Memuat data replay...</div>
+
+<script>
+  const SHEET_ID = 'GANTI_DENGAN_ID_SHEET_KAMU';
+  const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;
+fetch(SHEET_URL)
+    .then(res => res.text())
+    .then(data => 
+      const json = JSON.parse(data.substr(47).slice(0, -2));
+      const rows = json.table.rows;
+      let html = ”;
+
+      rows.forEach(row => 
+        const member = row.c[0]?.v || ”;
+        const judul  = row.c[1]?.v || ”;
+        const tanggal = row.c[2]?.v || ”;
+        const link   = row.c[3]?.v || ”;
+
+        html += `
+          <div class="replay-card">
+            <strong>{member} - judul</strong><br/>
+            <div class="date">{tanggal}</div>
+            <a href="${link}" target="_blank">Tonton Replay</a>
+          </div>
+        `;
+      });
+
+      document.getElementById('content').innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById('content').innerText = "Gagal mengambil data.";
+    });
+</script>
+
+</body>
+</html>
